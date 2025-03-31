@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  beach-bunny-bot:
+    image: your-dockerhub-username/beach-bunny-april-fools:1.0.0-rc.1
+    restart: unless-stopped
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - SERVER_ID=${SERVER_ID}
+      - ANNOUNCEMENT_CHANNEL_ID=${ANNOUNCEMENT_CHANNEL_ID}
+      - USE_OPENAI_GRADING=${USE_OPENAI_GRADING}
+      - LOG_LEVEL=${LOG_LEVEL}
+      - APP_NAME=${APP_NAME}
+    volumes:
+      - ./data:/app/data
+      - ./logs:/data/logs
