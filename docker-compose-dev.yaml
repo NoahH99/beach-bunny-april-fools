@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  beach-bunny-bot:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+      - ./logs:/data/logs

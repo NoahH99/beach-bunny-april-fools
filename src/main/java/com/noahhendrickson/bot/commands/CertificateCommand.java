@@ -24,7 +24,8 @@ public class CertificateCommand extends AbstractCommand {
         OptionMapping option = event.getOption("user");
         User user = option != null ? option.getAsUser() : event.getUser();
 
-        String username = user.getGlobalName();
+        String username = user.getName();
+
         logger.info("Certificate command invoked by {} for user {}", event.getUser().getIdLong(), username);
 
         try {
@@ -38,7 +39,7 @@ public class CertificateCommand extends AbstractCommand {
 
         } catch (Exception e) {
             logger.error("Failed to generate or send certificate for {}", username, e);
-            event.reply("❌ Failed to generate certificate for " + username + ".").setEphemeral(true).queue();
+            event.reply("<:tickNo:697249739250335775> Failed to generate certificate for " + username + ".").setEphemeral(true).queue();
         }
     }
 }

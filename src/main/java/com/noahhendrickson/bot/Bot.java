@@ -22,7 +22,7 @@ public class Bot {
         JDABuilder builder = JDABuilder.createDefault(token)
                 .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_MESSAGES, GatewayIntent.MESSAGE_CONTENT)
                 .enableCache(CacheFlag.MEMBER_OVERRIDES)
-                .setActivity(Activity.playing("Prom Queen | v1.0.0-beta.4"));
+                .setActivity(Activity.playing("Prom Queen | v1.0.1"));
 
         logger.debug("Registering event listeners...");
         builder.addEventListeners(

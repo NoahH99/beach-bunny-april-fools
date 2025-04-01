@@ -45,7 +45,7 @@ public class MessageListener extends ListenerAdapter {
         session.recordAnswer(message.getContentDisplay());
         message.delete().queue();
 
-        session.getThread().sendMessage("<:success:697249279458279485> Answer recorded.")
+        session.getThread().sendMessage("<:tickYes:697249641032319006> Answer recorded.")
                 .delay(3, TimeUnit.SECONDS)
                 .flatMap(Message::delete)
                 .queue();
@@ -116,10 +116,10 @@ public class MessageListener extends ListenerAdapter {
             return;
         }
 
-        session.getThread().sendMessage("Grading your response... this thread will delete in 1 minute.").queue();
+        session.getThread().sendMessage("Grading your response... this thread will delete in 10 seconds...").queue();
         new OpenAIGrader(announcementChannel).gradeAndAnnounce(session);
 
-        session.getThread().delete().queueAfter(75, TimeUnit.SECONDS);
+        session.getThread().delete().queueAfter(10, TimeUnit.SECONDS);
     }
 
     private void handleRestart(ButtonInteractionEvent e, TestSession session) {

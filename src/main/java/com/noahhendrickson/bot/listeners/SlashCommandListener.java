@@ -35,7 +35,7 @@ public class SlashCommandListener extends ListenerAdapter {
         try {
             switch (command) {
                 case "init" -> new InitCommand(context).run(event);
-                case "clear" -> new ClearCompletedUsersCommand(context).run(event);
+                case "clear" -> new ClearUserDataCommand(context).run(event);
                 case "set" -> new SetUUIDCommand(context).run(event);
                 case "cert" -> new CertificateCommand(context).run(event);
                 default -> logger.warn("Unknown slash command received: {}", command);

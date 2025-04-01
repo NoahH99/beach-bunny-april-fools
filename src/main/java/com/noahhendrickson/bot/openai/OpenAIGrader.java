@@ -52,7 +52,10 @@ public class OpenAIGrader {
 
             int score = 0;
             if (BotConfig.USE_OPENAI_GRADING) {
-                score = Math.min(gradeAnswer(question, correct, userAnswer) * 2, 100);
+                int adjustedGradeAnswer = gradeAnswer(question, correct, userAnswer) * 2;
+
+                score = adjustedGradeAnswer > 80 ? Math.min(adjustedGradeAnswer + 10, 100) : Math.max(adjustedGradeAnswer, 0);
+
                 logger.debug("Scored {} for question: '{}'", score, question);
             }
 

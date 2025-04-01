@@ -41,4 +41,9 @@ public class TestSessionManager {
         logger.debug("User {} is{} in an active session", userId, inSession ? "" : " not");
         return inSession;
     }
+
+    public void clearAll() {
+        activeSessions.clear();
+        logger.info("All sessions cleared from test records");
+    }
 }

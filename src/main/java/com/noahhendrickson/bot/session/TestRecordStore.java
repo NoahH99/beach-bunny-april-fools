@@ -23,7 +23,7 @@ public class TestRecordStore {
     public TestRecordStore() {
         Type type = new TypeToken<Set<Long>>() {}.getType();
 
-        Set<Long> loaded = dataStore.loadFromFile(SAVE_PATH, type, Collections.emptySet());
+        Set<Long> loaded = dataStore.loadFromFile(SAVE_PATH, type, new HashSet<>());
         completedUserIds = Objects.requireNonNullElseGet(loaded, HashSet::new);
 
         logger.info("Loaded {} completed test records.", completedUserIds.size());

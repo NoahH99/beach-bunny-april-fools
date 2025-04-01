@@ -7,6 +7,7 @@ import com.noahhendrickson.bot.ui.EmbedFactory;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
+import net.dv8tion.jda.api.managers.channel.concrete.ThreadChannelManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,8 +37,13 @@ public class StartTestUtil {
         logger.info("User {} ({}) is starting a new test session.", username, userId);
         event.deferReply(true).queue(hook -> hook.deleteOriginal().queue());
 
-        event.getChannel().asTextChannel().createThreadChannel(username + "-" + System.currentTimeMillis())
+        event.getChannel().asTextChannel().createThreadChannel(username + "-" + System.currentTimeMillis(), true)
+                .setInvitable(false)
                 .queue(thread -> {
+                    ThreadChannelManager manager = thread.getManager();
+
+                    manager.setSlowmode(3).queue();
+
                     Member member = event.getMember();
                     if (member == null) {
                         logger.warn("Member was null when starting thread for user {}", userId);
@@ -46,7 +52,6 @@ public class StartTestUtil {
 
                     logger.debug("Created thread {} for user {}", thread.getId(), userId);
                     thread.addThreadMember(member).queue();
-                    thread.getManager().setSlowmode(3).queue();
 
                     List<Question> questions = context.getQuestionRepository().getRandomQuestions(5);
                     TestSession session = context.getSessionManager().startSession(member, thread, questions);
